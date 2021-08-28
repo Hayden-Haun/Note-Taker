@@ -189,11 +189,10 @@ if (newNoteBtn && saveNoteBtn) {
     console.log("newNote button is working!");
   });
 
-  saveNoteBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log("saveNote button is working!");
-    handleNoteSave(event);
-  });
+  // saveNoteBtn.addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   console.log("saveNote button is working!");
+  //   handleNoteSave(event);
 }
 
 // if (noteList) {
