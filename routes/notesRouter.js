@@ -34,6 +34,18 @@ const readAndAppend = (content, file) => {
     }
   });
 };
+const readAndDelete = (content, file) => {
+  fs.readFile(file, "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      const parsedData = JSON.parse(data);
+      const indexDeleted = parsedData.findIndex((x) => x.id === content);
+      parsedData.splice(indexDeleted, 1);
+      writeToFile(file, parsedData);
+    }
+  });
+};
 //generates a unique ID
 const uuid = () =>
   Math.floor((1 + Math.random()) * 0x10000)
@@ -70,9 +82,14 @@ notes.post("/", (req, res) => {
   }
 });
 
-// notes.get("/:id", (req, res) => {
-//   console.log(req.params);
-// });
+notes.delete("/*", (req, res) => {
+  console.log(`${req.method} request received for notes`);
+  console.info(req.params[0]);
+
+  const deletedNote = req.params[0];
+  readAndDelete(deletedNote, "./db/db.json");
+  res.json("Note deleted");
+});
 
 // notes.delete("/:id", (req, res) => {
 //   console.log(`${req.method} request received for notes`);
