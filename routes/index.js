@@ -7,6 +7,6 @@ const notesRouter = require("./notesRouter");
 
 //Middleware to direct to notes Router
 
-app.use("/api/notes", notesRouter);
+app.use("/notes", notesRouter);
 
 module.exports = app;
