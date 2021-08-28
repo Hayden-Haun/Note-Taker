@@ -182,6 +182,7 @@ if (window.location.pathname === "/notes") {
 
 getAndRenderNotes();
 
+//if newBtn and saveBtn are on the page, add the event listeners to the code
 if (newNoteBtn && saveNoteBtn) {
   newNoteBtn.addEventListener("click", (event) => {
     event.preventDefault();
@@ -191,5 +192,6 @@ if (newNoteBtn && saveNoteBtn) {
   saveNoteBtn.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("saveNote button is working!");
+    handleNoteSave(event);
   });
 }
