@@ -195,3 +195,11 @@ if (newNoteBtn && saveNoteBtn) {
     handleNoteSave(event);
   });
 }
+
+// if (noteList) {
+//   noteList.addEventListener("click", (event) => {
+//     event.preventDefault();
+//     console.log("noteList item clicked!");
+//     renderActiveNote(event);
+//   });
+// }

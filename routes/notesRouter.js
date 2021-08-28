@@ -2,8 +2,9 @@
 const notes = require("express").Router();
 const util = require("util");
 const fs = require("fs");
+const data = require("../db/db.json");
 
-//require
+//define 4 helper functions: readFromFile(), writeToFile(), readAndAppend(), uuid()
 const readFromFile = util.promisify(fs.readFile);
 
 /**
@@ -33,6 +34,11 @@ const readAndAppend = (content, file) => {
     }
   });
 };
+//generates a unique ID
+const uuid = () =>
+  Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
 
 notes.get("/", (req, res) => {
   console.log(`${req.method} request received for notes`);
@@ -43,13 +49,12 @@ notes.post("/", (req, res) => {
   console.log(`${req.method} request received for notes`);
 
   const { title, text } = req.body;
-  console.log(title);
-  console.log(text);
 
   if (title && text) {
     const newNote = {
       title,
       text,
+      id: uuid(),
     };
 
     readAndAppend(newNote, "./db/db.json");
@@ -64,5 +69,18 @@ notes.post("/", (req, res) => {
     res.json("Error in posting feedback");
   }
 });
+
+// notes.get("/:id", (req, res) => {
+//   console.log(req.params);
+// });
+
+// notes.delete("/:id", (req, res) => {
+//   console.log(`${req.method} request received for notes`);
+//   const note_id = req.params.note_id;
+//   console.log(note_id);
+//   //   if (currentNote){
+//   //     for (let i=0; i < data.length )
+//   //   }
+// });
 
 module.exports = notes;
